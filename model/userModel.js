@@ -6,11 +6,12 @@ import crypto from "crypto";
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please tell us your name"],
+    required: [true, "Please provide your name"],
   },
   email: {
     type: String,
     required: [true, "Please provide your email"],
+    validate: [validator.isEmail, "Please provide a valid email address"],
     unique: true,
     lowercase: true,
   },
@@ -37,7 +38,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["candidate", "business owner"],
+    enum: ["candidate", "business owner", "admin"],
     required: [true, "Please select a role"],
   },
   googleId: String,
