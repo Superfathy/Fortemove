@@ -48,6 +48,7 @@ const applicationSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+applicationSchema.index({ job: 1, user: 1 }, { unique: true });
 
 const Application = mongoose.model("Application", applicationSchema);
 

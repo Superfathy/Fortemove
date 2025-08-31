@@ -102,3 +102,31 @@ export const applyForJob = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+export const getMyApplications = catchAsync(async (req, res, next) => {
+  const applications = await Application.find({ user: req.user.id })
+    .populate("job", "title company location salary")
+    .sort({ appliedAt: -1 });
+
+  res.status(200).json({
+    status: "success",
+    results: applications.length,
+    data: { applications },
+  });
+});
+
+export const getMyApplication = catchAsync(async (req, res, next) => {
+  const application = await Application.findOne({
+    _id: req.params.id,
+    user: req.user.id,
+  }).populate("job", "title company location salary");
+
+  if (!application) {
+    return next(new AppError("No application found with that ID", 404));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: { application },
+  });
+});
