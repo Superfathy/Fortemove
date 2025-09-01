@@ -9,11 +9,7 @@ import {
   getAllJobs,
 } from "../controllers/jobController.js";
 import { protect, restrictTo } from "../controllers/authController.js";
-import {
-  uploadJobImages,
-  resizeJobImages,
-  cleanupJobImages,
-} from "../utils/upload.js";
+import { uploadJobImages, resizeJobImages } from "../utils/upload.js";
 
 const router = express.Router();
 

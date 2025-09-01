@@ -49,7 +49,10 @@ const applicationSchema = new mongoose.Schema(
   }
 );
 applicationSchema.index({ job: 1, user: 1 }, { unique: true });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 44a21e240e5a6f2fdd3666f6230223e4da13d923
 
 const Application = mongoose.model("Application", applicationSchema);
 
