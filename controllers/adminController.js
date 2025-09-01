@@ -4,6 +4,7 @@ import Job from "../model/jobModel.js";
 import Application from "../model/applicationModel.js";
 import User from "../model/userModel.js";
 import { Questionnaire, Talent } from "../model/formModel.js";
+import APIFeatures from "../utils/apiFeatures.js";
 
 // Admin Dashboard
 export const getAdminDashboard = catchAsync(async (req, res, next) => {
@@ -79,16 +80,25 @@ export const deleteUser = catchAsync(async (req, res, next) => {
 });
 
 export const getAllApplications = catchAsync(async (req, res, next) => {
-  const applications = await Application.find()
-    .populate("job", "title company location")
-    .populate("user", "name email role");
+  const features = new APIFeatures(
+    Application.find()
+      .populate('job', 'title company location')
+      .populate('user', 'name email role'),
+    req.query
+  )
+    .filter()
+    .search() 
+    .sort()
+    .limitFields()
+    .paginate();
 
+  const applications = await features.query;
   res.status(200).json({
-    status: "success",
+    status: 'success',
     results: applications.length,
     data: {
-      applications,
-    },
+      applications
+    }
   });
 });
 

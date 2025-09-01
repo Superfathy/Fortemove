@@ -12,6 +12,8 @@ import authRoutes from "./routes/authRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import formRoutes from "./routes/formRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import candidateRoutes from "./routes/candidateRoutes.js";
+import importExportRoutes from "./routes/importExportRoutes.js";
 import globalErrorHandler from "./controllers/errorController.js";
 import AppError from "./utils/appError.js";
 
@@ -64,7 +66,8 @@ app.use("/api/v1/users", authRoutes);
 app.use("/api/v1/jobs", jobRoutes);
 app.use("/api/v1/forms", formRoutes);
 app.use("/api/v1/admin", adminRoutes);
-
+app.use("/api/v1/candidate", candidateRoutes);
+app.use("/api/v1/import-export", importExportRoutes);
 // Error handling middleware
 // app.all("*", (req, res, next) => {
 //   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
