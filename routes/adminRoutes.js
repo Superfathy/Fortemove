@@ -19,11 +19,10 @@ import {
 
 const router = express.Router();
 
-// Middleware to protect routes and restrict access to admin users
-// Protect all routes after this middleware
+
 router.use(protect);
 // Only allow 'admin'to access the admin routes
-router.use(restrictTo("admin"));
+// router.use(restrictTo("admin"));
 // Admin Dashboard Route
 router.route("/dashboard").get(getAdminDashboard);
 // Admin Users Management Routes
