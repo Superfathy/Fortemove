@@ -22,7 +22,7 @@ const router = express.Router();
 
 router.use(protect);
 // Only allow 'admin'to access the admin routes
-// router.use(restrictTo("admin"));
+router.use(restrictTo("admin"));
 // Admin Dashboard Route
 router.route("/dashboard").get(getAdminDashboard);
 // Admin Users Management Routes
